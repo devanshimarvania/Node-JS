@@ -1,0 +1,59 @@
+<%- include('partials/header') %>
+
+<div class="row justify-content-center">
+  <div class="col-12 col-md-7 col-lg-6">
+
+    <h2 class="mb-4">✏️ Edit Task <span class="text-muted fs-5">#<%= task.id %></span></h2>
+
+    <% if (error) { %>
+      <div class="alert alert-danger alert-dismissible fade show">
+        ⚠️ <%= error %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      </div>
+    <% } %>
+
+    <div class="card">
+      <div class="card-body">
+        <form action="/edit/<%= task.id %>" method="POST">
+
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Task Title <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" name="title" value="<%= task.title %>" required />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Description</label>
+            <textarea class="form-control" name="description" rows="3"><%= task.description %></textarea>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Priority</label>
+            <select class="form-select" name="priority">
+              <option value="High"   <%= task.priority === 'High'   ? 'selected' : '' %>>🔴 High</option>
+              <option value="Medium" <%= task.priority === 'Medium' ? 'selected' : '' %>>🟡 Medium</option>
+              <option value="Low"    <%= task.priority === 'Low'    ? 'selected' : '' %>>🟢 Low</option>
+            </select>
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label fw-semibold">Status</label>
+            <select class="form-select" name="status">
+              <option value="Pending"     <%= task.status === 'Pending'     ? 'selected' : '' %>>⏳ Pending</option>
+              <option value="In Progress" <%= task.status === 'In Progress' ? 'selected' : '' %>>▶️ In Progress</option>
+              <option value="Completed"   <%= task.status === 'Completed'   ? 'selected' : '' %>>✅ Completed</option>
+            </select>
+          </div>
+
+          <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-warning px-4 fw-bold">💾 Save Changes</button>
+            <a href="/" class="btn btn-outline-secondary">Cancel</a>
+          </div>
+
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<%- include('partials/footer') %>
